@@ -69,8 +69,17 @@ bengali_months <- tibble(
 
 # Scrap Data --------------------------------------------------------------
 
-rawSub <- btrc_link %>%
-  read_html() %>%
+rawHtml <- btrc_link %>%
+  read_html() 
+
+updated <- rawHtml %>% 
+  html_node(".updateText") %>%
+  html_text() %>% 
+  gsub("সর্ব-শেষ হাল-নাগাদ: ", "", text) %>% 
+  stringi::stri_trans_general('Bengali-Latin')
+
+
+rawSub <- rawHtml %>% 
   html_table(header = TRUE, trim = TRUE) %>%
   extract2(1) %>%
   set_names(c('month', 'gp', 'rb', 'bl', 'tt', 'industry')) %>%

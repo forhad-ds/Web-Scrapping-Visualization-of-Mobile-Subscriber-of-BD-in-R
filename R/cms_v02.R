@@ -1,23 +1,3 @@
-options(scipen = 999)
-
-# Packages ----------------------------------------------------------------
-
-suppressMessages(suppressWarnings(library(tidyverse)))
-suppressMessages(suppressWarnings(library(lubridate)))
-suppressMessages(suppressWarnings(library(stringr)))
-suppressMessages(suppressWarnings(library(zoo)))
-suppressMessages(suppressWarnings(library(readxl)))
-suppressMessages(suppressWarnings(library(openxlsx)))
-suppressMessages(suppressWarnings(library(gt)))
-suppressMessages(suppressWarnings(library(gtExtras)))
-
-# Utilities ---------------------------------------------------------------
-
-source('Function/borders.R')
-source('Function/gt_theme_excel_customized.R')
-source('Function/combine_to_html.R')
-source('R/color.R')
-
 # CMS Raw Data ------------------------------------------------------------
 
 cmsRaw <- rawSub %>%
@@ -255,6 +235,9 @@ comb %>%
     locations = list(cells_body(columns = -Operator), cells_column_labels())
   ) %>%
   cols_hide(columns = c(Trend)) %>%
+  tab_footnote(
+    footnote = glue::glue("Data is last updated {updated_date}")
+  ) %>% 
   sub_missing(missing_text = '') %>%
   gt_theme_excel_customized(color = 'white') %>%
   cols_align(columns = Operator, align = 'center') -> gt_cms
@@ -267,7 +250,7 @@ gt_cms
     
 gtsave(
   gt_cms,
-  glue::glue('Image/CMS_{Sys.Date()}.png'),
+  glue::glue('Image/CMS.png'),
   vwidth = 1400,
   vheight = 1000,
   zoom = 1.3,
