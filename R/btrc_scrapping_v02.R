@@ -125,10 +125,12 @@ if(updated_date > last_update_date) {
     glue::glue(
       ' @echo off
     REM This is a generated batch file
-    git init
+    git pull
+    git merge
+    git add .
     git commit -m "commit for updated {updated_date}"
     git branch -M main
-    git remote add origin https://github.com/forhad-ds/Web-Scrapping-Visualization-of-Mobile-Subscriber-of-BD-in-R.git
+    REM git remote add origin https://github.com/forhad-ds/Web-Scrapping-Visualization-of-Mobile-Subscriber-of-BD-in-R.git
     git push -u origin main
   '
     )
