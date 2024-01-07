@@ -76,7 +76,7 @@ date <- updated[1] %>%
 
 month <- bengali_months %>%
   filter(bengali == updated[2]) %>%
-  pull(english) %>%
+  dplyr::pull(english) %>%
   strtrim(3) %>%
   tolower()
 
@@ -119,30 +119,11 @@ if(updated_date > last_update_date) {
   source('R/cms_v02.R')
   
   
-  # Create git Batch --------------------------------------------------------
+  # Run git Batch --------------------------------------------------------
   
-  gitBatch <-
-    glue::glue(
-      ' @echo off
-    REM This is a generated batch file
-    git pull
-    git merge
-    git add .
-    git commit -m "commit for updated {updated_date}"
-    git branch -M main
-    REM git remote add origin https://github.com/forhad-ds/Web-Scrapping-Visualization-of-Mobile-Subscriber-of-BD-in-R.git
-    git push -u origin main
-  '
-    )
-  
-  writeLines(gitBatch, 'Batch/gitbatch.bat')
-} else {
-  gitBatch <-
-    glue::glue(
-      ' @echo off'
-    )
-  writeLines(gitBatch, 'Batch/gitbatch.bat')
-}
+ # source('R/git.R')
+
+} 
 
 
 # The End -----------------------------------------------------------------

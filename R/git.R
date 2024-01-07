@@ -1,13 +1,7 @@
-library(git2r)
-# Set your user identity
-git_user <- person("forhad-ds", "forhad_isrt@outlook.com")
-
-# Open the repository
-repo <- repository("https://github.com/forhad-ds/Web-Scrapping-Visualization-of-Mobile-Subscriber-of-BD-in-R")
-
-# Stage changes (replace "file.txt" with the actual file you want to commit)
-add(repo, "Image/CMS.png")
-
-# Commit changes
-commit_msg <- "up"
-commit(repo, author = git_user, committer = git_user, message = commit_msg)
+system('git config --global user.email "forhad_isrt@outlook.com"')
+system('git config --global user.name "forhad-ds"')
+system("git pull")
+system("git merge")
+system("git add Image/CMS.png")
+system(glue::glue('git commit -m " updated {updated_date}"'))
+system("git push -u origin main")
