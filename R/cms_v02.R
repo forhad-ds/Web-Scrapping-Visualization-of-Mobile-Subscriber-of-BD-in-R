@@ -236,7 +236,8 @@ comb %>%
   ) %>%
   cols_hide(columns = c(Trend)) %>%
   tab_footnote(
-    footnote = glue::glue("Data is last updated {updated_date}")
+    footnote = glue::glue("<strong><font color='red'>Data is last updated: {updated_date}</font></strong> ") %>% 
+      gt::html()
   ) %>% 
   sub_missing(missing_text = '') %>%
   gt_theme_excel_customized(color = 'white') %>%
@@ -247,23 +248,28 @@ gt_cms
 
 
 # Save the GT Object ------------------------------------------------------
-    
+
+file_name <- glue::glue('Image/CMS_{updated_date}.png')
+
 gtsave(
   gt_cms,
-  glue::glue('Image/CMS.png'),
+  file_name,
   vwidth = 1400,
   vheight = 1000,
   zoom = 1.3,
   expand = 2
 )
 
-# Save GT object as html --------------------------------------------------
-# 
-# gtsave(
-#   gt_cms,
-#   glue::glue('html/CMS.html')
-# )
-    
+
+# Re Write The README -----------------------------------------------------
+
+txt <- glue::glue(
+  "# Web-Scrapping-Visualization-of-Mobile-Subscriber-of-BD-in-R
+![BD_CMS](https://github.com/forhad-ds/Web-Scrapping-Visualization-of-Mobile-Subscriber-of-BD-in-R/blob/main/{file_name})
+"
+)
+
+writeLines(txt, 'README.md')
     
 # The End -----------------------------------------------------------------
     
