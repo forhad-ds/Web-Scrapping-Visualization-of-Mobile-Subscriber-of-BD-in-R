@@ -236,7 +236,7 @@ comb %>%
   ) %>%
   cols_hide(columns = c(Trend)) %>%
   tab_footnote(
-    footnote = glue::glue("Data is last updated {updated_date}")
+    footnote = glue::glue("Data is last updated ")
   ) %>% 
   sub_missing(missing_text = '') %>%
   gt_theme_excel_customized(color = 'white') %>%
