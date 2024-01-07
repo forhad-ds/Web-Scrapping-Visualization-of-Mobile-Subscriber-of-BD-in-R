@@ -1,5 +1,9 @@
-system('git config --global user.email "forhad_isrt@outlook.com"')
-system('git config --global user.name "forhad-ds"')
+user_mail <- readLines("Cred/user_mail")
+user_name <- readLines("Cred/user_name")
+
+
+system(glue::glue('git config --global user.email "{user_mail}"'))
+system(glue::glue('git config --global user.name "{user_name}"'))
 system("git pull")
 system("git merge")
 system("git add Image/CMS.png")

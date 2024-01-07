@@ -2,4 +2,6 @@
 .Rhistory
 .RData
 .Ruserdata
-.git.R
+./R/git.R
+./Cred
+.gitignore

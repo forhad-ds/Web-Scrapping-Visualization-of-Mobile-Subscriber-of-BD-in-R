@@ -236,7 +236,7 @@ comb %>%
   ) %>%
   cols_hide(columns = c(Trend)) %>%
   tab_footnote(
-    footnote = glue::glue("Data is last updated ")
+    footnote = glue::glue("Data is last updated {updated_date}")
   ) %>% 
   sub_missing(missing_text = '') %>%
   gt_theme_excel_customized(color = 'white') %>%
@@ -258,11 +258,11 @@ gtsave(
 )
 
 # Save GT object as html --------------------------------------------------
-
-gtsave(
-  gt_cms,
-  glue::glue('html/CMS.html')
-)
+# 
+# gtsave(
+#   gt_cms,
+#   glue::glue('html/CMS.html')
+# )
     
     
 # The End -----------------------------------------------------------------
